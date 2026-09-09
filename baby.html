@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Many Many Many.. Happy Returns Of The My Kuchu Puchu Mumma Birthday 🥺❤️</title>
+    
+    <!-- Google Fonts: Playfair Display (Serif/Elegant) and Lato (Clean Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           THEME VARIABLES & BASE STYLES
+           ========================================================================== */
+        :root {
+            --primary-red: #C8102E;
+            --bg-white: #ffffff;
+            --text-main: #333333;
+            --text-muted: #444444;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==========================================================================
+           FIXED BACKGROUND
+           ========================================================================== */
+        .hero-bg {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('hero.jpg'); /* Your background photo */
+            background-size: cover;
+            background-position: center;
+            /* Starts very clear, slightly dark so white text pops */
+            filter: blur(1.5px) brightness(0.65);
+            transform: scale(1.05); /* Prevents white edges when blurring */
+            z-index: -1;
+            will-change: filter; /* Optimizes the scroll animation */
+        }
+
+        /* ==========================================================================
+           SCREEN 1: HERO TITLE
+           ========================================================================== */
+        .hero-section {
+            position: relative;
+            height: 100vh; /* Exactly one screen tall */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end; 
+            text-align: center;
+            padding-bottom: 40px; 
+            z-index: 1;
+        }
+
+        .hero-content {
+            padding: 0 24px;
+            max-width: 700px;
+            color: #ffffff;
+            will-change: opacity, transform;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .swipe-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+            color: #ffffff;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            animation: softBounce 2.5s infinite ease-in-out;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .swipe-hint svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @keyframes softBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ==========================================================================
+           SCREEN 2: THE MESSAGE (Over the blurred photo)
+           ========================================================================== */
+        .message-section {
+            position: relative;
+            min-height: 100vh; /* Takes up another full screen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            z-index: 1;
+            /* Background is transparent so the blurred photo shows through! */
+            background-color: transparent; 
+        }
+
+        .hero-message {
+            color: #ffffff;
+            font-size: clamp(1.1rem, 4vw, 1.25rem);
+            line-height: 1.8;
+            font-weight: 300;
+            text-align: center;
+            max-width: 700px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.7); /* Deep shadow for readability */
+        }
+
+        /* ==========================================================================
+           SCREEN 3: PHOTO GALLERY (Slides over everything)
+           ========================================================================== */
+        .gallery-section {
+            position: relative;
+            z-index: 2; /* Sits ON TOP of the fixed photo */
+            background-color: var(--bg-white); /* Solid white background */
+            padding: 80px 24px;
+            /* Elegant curved top to make it look like a card sliding up */
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.15); 
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            height: 220px; 
+        }
+
+        .gallery-item:nth-child(4n + 1) { grid-column: span 1; }
+        .gallery-item:nth-child(4n + 2) { grid-column: span 2; }
+        .gallery-item:nth-child(4n + 3) { grid-column: span 2; }
+        .gallery-item:nth-child(4n + 4) { grid-column: span 1; }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover, .gallery-item:active {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+        .gallery-item:hover img, .gallery-item:active img {
+            transform: scale(1.06);
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid { gap: 24px; }
+            .gallery-item { height: 300px; }
+        }
+
+        /* ==========================================================================
+           SECTION 4: CLOSING
+           ========================================================================== */
+        .closing-section {
+            position: relative;
+            z-index: 2;
+            background-color: var(--bg-white);
+            padding: 0 24px 100px; /* Reduced top padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .music-control-wrapper {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .music-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--bg-white);
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(200, 16, 46, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+            position: relative;
+        }
+
+        .music-btn:hover, .music-btn:active {
+            transform: scale(1.05);
+            background-color: var(--primary-red);
+            color: var(--bg-white);
+        }
+
+        .music-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            margin-left: 4px;
+            transition: opacity 0.2s ease;
+        }
+        
+        .music-btn.is-playing svg { margin-left: 0; }
+
+        .music-pulse-ring {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            border: 2px solid var(--primary-red);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .is-playing ~ .music-pulse-ring {
+            animation: pulsePlay 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulsePlay {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.6); opacity: 0; border-width: 1px; }
+        }
+
+        .closing-photo-container {
+            position: relative;
+            width: 100%;
+            max-width: 280px;
+            margin-bottom: 60px;
+        }
+
+        .closing-img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hearts-layer {
+            position: absolute;
+            bottom: 0;
+            left: -20px;
+            right: -20px;
+            height: 150%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: 20px;
+            color: var(--primary-red);
+            opacity: 0;
+            will-change: transform, opacity, filter;
+        }
+
+        @keyframes floatHeartUp {
+            0% { 
+                transform: translateY(0) scale(0.6) rotate(0deg); 
+                opacity: 0.8; 
+                filter: blur(0px);
+            }
+            100% { 
+                transform: translateY(-250px) scale(1.4) rotate(20deg); 
+                opacity: 0; 
+                filter: blur(8px);
+            }
+        }
+
+        .closing-message {
+            max-width: 500px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            font-family: var(--font-display);
+            font-style: italic;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero-bg { filter: brightness(0.45); transform: none !important; }
+            .floating-heart { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FIXED BACKGROUND IMAGE -->
+    <div class="hero-bg" id="heroBg"></div>
+
+    <!-- ==========================================================================
+         SCREEN 1: HERO (PHOTO & WISH ONLY)
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+        <div class="hero-content" id="heroContent">
+                        <div class="hearts-layer" id="heartsLayer"></div>
+
+            <h1 class="hero-title">
+                  Many Many More.. Happy Returns Of The Day<br>MUMMA KUTTI<br>🥺💕
+            </h1>
+
+            <div class="swipe-hint" id="swipeHint">
+                swipe down
+                <svg viewBox="0 0 24 24">
+                    <path d="M18 15l-6-6-6 6"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SCREEN 2: THE LONG MESSAGE (Text flows over the blurred photo)
+         ========================================================================== -->
+    <section class="message-section" id="messageSection">
+        <p class="hero-message">
+<b>Happy Birthday mumma🎈🥺</b><br><br>
+<b>My bbyyy today you're turning 5 years old mera mumma jannuuuu,(23 > 2+3 > 5years only😤)</b><br>
+<b>My bbyyyy Ma matha ji janmadina subhakangshalu🙂‍↕️</b><br>
+<b>Na bujjii thalii e lokam loki ochii 157788000 seconds Avutundi ante just 5 years<br>🤭🤭🤭💋❤️💦💦💦</b><br>
+<b>Ehh mumma see in the background img how happy mumma is.Whatever happens Life long mumma has to maintain this happiness 🥰 okayyy😤.</b>
+<br>
+<b>Bbyyy your the bravest, strongest, most stable , caring, lovable person in the world 🌎</b>
+<br>
+nanna please maintain it like that don't listen any dog word's 🐶 they just bark.Mumma is strongest bravest and bububuu..🥺💦</b>
+        </p>
+    </section>
+
+    <!-- ==========================================================================
+         SCREEN 3: PHOTO GALLERY (White background covers the photo)
+         ========================================================================== -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="1.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="2.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="3.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="4.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="5.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="6.jpg" alt="A beautiful memory together" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: CLOSING
+         ========================================================================== -->
+    <section class="closing-section">
+        <div class="music-control-wrapper">
+            <audio id="bgMusic" src="Audio1.mp3" loop></audio>
+            
+            <button class="music-btn" id="playBtn" aria-label="Play background music">
+                <svg id="iconPlay" viewBox="0 0 24 24">
+                    <path d="M5 3l14 9-14 9V3z"/>
+                </svg>
+                <svg id="iconPause" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M6 4h4v16H6zm8 0h4v16h-4z"/>
+                </svg>
+            </button>
+            <div class="music-pulse-ring"></div>
+        </div>
+
+        <div class="closing-photo-container">
+            <div class="hearts-layer" id="heartsLayer"></div>
+            <img class="closing-img" src="7.jpg" alt="One last favorite memory" loading="lazy">
+        <p class="closing-message">
+            First honey moon photo be like🤭..<br><br>
+        </p>
+        </div>
+        
+        <p class="closing-message">
+    <br>
+    <a href="https://drive.google.com/file/d/14NDf-pA7guxwcmoasQawouyrrDnbo4d0/view?usp=sharing" target="_blank" style="color: inherit; text-decoration: underline;">click me my love ❤️</a>
+</p>
+    </section>
+
+    <!-- ==========================================================================
+         INTERACTIONS & LOGIC
+         ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. DYNAMIC BLUR SCROLL EFFECT ---
+            const heroBg = document.getElementById('heroBg');
+            const heroContent = document.getElementById('heroContent');
+            const heroSection = document.getElementById('hero');
+            
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (!prefersReducedMotion) {
+                let ticking = false;
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            const scrollY = window.scrollY;
+                            const vh = window.innerHeight;
+                            
+                            // We only care about calculating progress while the user is scrolling 
+                            // through the first screen (from 0 to 100vh)
+                            const progress = Math.min(scrollY / vh, 1);
+
+                            if (progress <= 1) {
+                                // 1. Title fades out entirely and translates up slightly
+                                heroContent.style.opacity = Math.max(1 - (progress * 1.5), 0);
+                                heroContent.style.transform = `translateY(${progress * -50}px)`;
+
+                                // 2. Background Photo dynamically blurs and darkens so message becomes readable
+                                // Blur goes from 1.5px to 14px
+                                const currentBlur = 1.5 + (progress * 12.5); 
+                                // Brightness goes from 0.65 to 0.35 (darker)
+                                const currentBrightness = 0.65 - (progress * 0.3);
+
+                                heroBg.style.filter = `blur(${currentBlur}px) brightness(${currentBrightness})`;
+                            }
+                            
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+
+            // --- 2. AUDIO PLAYBACK LOGIC ---
+            const bgMusic = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('playBtn');
+            const iconPlay = document.getElementById('iconPlay');
+            const iconPause = document.getElementById('iconPause');
+            let isPlaying = false;
+
+            playBtn.addEventListener('click', () => {
+                if (!isPlaying) {
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        playBtn.classList.add('is-playing');
+                        iconPlay.style.display = 'none';
+                        iconPause.style.display = 'block';
+                    }).catch(err => {
+                        console.warn("Audio playback was prevented:", err);
+                        alert("Please make sure the audio file path is correct to play music!");
+                    });
+                } else {
+                    bgMusic.pause();
+                    isPlaying = false;
+                    playBtn.classList.remove('is-playing');
+                    iconPlay.style.display = 'block';
+                    iconPause.style.display = 'none';
+                }
+            });
+
+            // --- 3. FLOATING HEARTS ANIMATION GENERATOR ---
+            if (!prefersReducedMotion) {
+                const heartsLayer = document.getElementById('heartsLayer');
+                const heartSymbols = ['❤️', '💋', '🥰', '💕', '🥺'];
+                const heartCount = 12; 
+
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    
+                    heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    
+                    const leftPos = Math.random() * 100; 
+                    const size = 14 + Math.random() * 20; 
+                    const duration = 3.5 + Math.random() * 4; 
+                    const delay = Math.random() * 5; 
+                    
+                    heart.style.left = `${leftPos}%`;
+                    heart.style.fontSize = `${size}px`;
+                    heart.style.animation = `floatHeartUp ${duration}s ease-in infinite`;
+                    heart.style.animationDelay = `${delay}s`;
+
+                    heartsLayer.appendChild(heart);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
